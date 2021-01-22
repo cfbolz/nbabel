@@ -56,12 +56,16 @@ class Cluster(list):
         for particle in self:
             particle.acceleration1 = particle.acceleration
             particle.acceleration = np.Point3D(0.0, 0.0, 0.0)
-        for p1, p2 in combinations(self, 2):
-            vector = p1.position - p2.position
-            distance_square = (vector ** 2).sum()
-            distance_cube = distance_square * sqrt(distance_square)
-            p1.acceleration -= (p2.mass / distance_cube) * vector
-            p2.acceleration += (p1.mass / distance_cube) * vector
+        for p1 in self:
+            for p2 in self:
+                if p1 is p2:
+                    continue
+
+                vector = p1.position - p2.position
+                distance_square = (vector ** 2).sum()
+                distance_cube = distance_square * sqrt(distance_square)
+                p1.acceleration -= (p2.mass / distance_cube) * vector
+                p2.acceleration += (p1.mass / distance_cube) * vector
 
     def __advance_positions(self, dt):
         for p in self:
