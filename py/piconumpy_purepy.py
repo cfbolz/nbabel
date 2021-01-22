@@ -1,3 +1,66 @@
+class Point3D(object):
+    # not needed for PyPy but can be written
+    x: float
+    y: float
+    z: float
+
+    @classmethod
+    def _zero(cls):
+        return cls(0.0, 0.0, 0.0)
+
+    def norm(self):
+        return sqrt(self.norm2())
+
+    def norm_cube(self):
+        norm2 = self.norm2()
+        return norm2 * sqrt(norm2)
+
+    def __repr__(self):
+        return f"[{self.x:.10f}, {self.y:.10f}, {self.z:.10f}]"
+
+    def __init__(self, x, y, z):
+        self.x = x
+        self.y = y
+        self.z = z
+
+    def norm2(self):
+        return self.x ** 2 + self.y ** 2 + self.z ** 2
+
+    def __add__(self, other):
+        return Point3D(self.x + other.x, self.y + other.y, self.z + other.z)
+
+    def __sub__(self, other):
+        return Point3D(self.x - other.x, self.y - other.y, self.z - other.z)
+
+    def __iadd__(self, other):
+        self.x += other.x
+        self.y += other.y
+        self.z += other.z
+        return self
+
+    def __isub__(self, other):
+        self.x -= other.x
+        self.y -= other.y
+        self.z -= other.z
+        return self
+
+    def __mul__(self, other):
+        return Point3D(other * self.x, other * self.y, other * self.z)
+
+    __rmul__ = __mul__
+
+    def __pow__(self, exponent):
+        return Point3D(self.x ** exponent, self.y ** exponent, self.z ** exponent)
+
+    def sum(self):
+        return self.x + self.y + self.z
+
+    def reset_to_0(self):
+        self.x = 0.0
+        self.y = 0.0
+        self.z = 0.0
+
+
 class array:
     def __init__(self, data):
         if isinstance(data, list):

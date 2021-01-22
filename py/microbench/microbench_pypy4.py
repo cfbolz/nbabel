@@ -49,6 +49,20 @@ class Point4D(PointND):
             self.x - other.x, self.y - other.y, self.z - other.z, self.w - other.w
         )
 
+    def __iadd__(self, other):
+        self.x += other.x
+        self.y += other.y
+        self.z += other.z
+        self.w += other.w
+        return self
+
+    def __isub__(self, other):
+        self.x -= other.x
+        self.y -= other.y
+        self.z -= other.z
+        self.w -= other.w
+        return self
+
     def __mul__(self, other):
         return Point4D(
             other * self.x, other * self.y, other * self.z, other * self.w
@@ -85,6 +99,18 @@ class Point3D(PointND):
 
     def __sub__(self, other):
         return Point3D(self.x - other.x, self.y - other.y, self.z - other.z)
+
+    def __iadd__(self, other):
+        self.x += other.x
+        self.y += other.y
+        self.z += other.z
+        return self
+
+    def __isub__(self, other):
+        self.x -= other.x
+        self.y -= other.y
+        self.z -= other.z
+        return self
 
     def __mul__(self, other):
         return Point3D(other * self.x, other * self.y, other * self.z)

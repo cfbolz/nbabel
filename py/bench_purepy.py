@@ -14,10 +14,10 @@ class Particle:
 
     def __init__(self, mass, x, y, z, vx, vy, vz):
         self.mass = mass
-        self.position = np.array([x, y, z])
-        self.velocity = np.array([vx, vy, vz])
-        self.acceleration = np.array([0.0, 0.0, 0.0])
-        self.acceleration1 = np.array([0.0, 0.0, 0.0])
+        self.position = np.Point3D(x, y, z)
+        self.velocity = np.Point3D(vx, vy, vz)
+        self.acceleration = np.Point3D(0.0, 0.0, 0.0)
+        self.acceleration1 = np.Point3D(0.0, 0.0, 0.0)
 
     @property
     def ke(self):
@@ -55,7 +55,7 @@ class Cluster(list):
     def accelerate(self):
         for particle in self:
             particle.acceleration1 = particle.acceleration
-            particle.acceleration = np.array([0.0, 0.0, 0.0])
+            particle.acceleration = np.Point3D(0.0, 0.0, 0.0)
         for p1, p2 in combinations(self, 2):
             vector = p1.position - p2.position
             distance_square = (vector ** 2).sum()
