@@ -107,7 +107,6 @@ def main(Point):
         position.x = x
         x += 1.0
 
-    accelerations = [Point(0.0, 0.0, 0.0) for i in range(number_particles)]
     particles = [Particle(masses[i], positions[i], Point(0.0, 0.0, 0.0)) for i in range(number_particles)]
 
     compute_accelerations(particles)
