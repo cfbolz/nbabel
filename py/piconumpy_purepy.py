@@ -4,6 +4,11 @@ class Point3D(object):
     y: float
     z: float
 
+    def __init__(self, x, y, z):
+        self.x = x
+        self.y = y
+        self.z = z
+
     @classmethod
     def _zero(cls):
         return cls(0.0, 0.0, 0.0)
@@ -17,11 +22,6 @@ class Point3D(object):
 
     def __repr__(self):
         return f"[{self.x:.10f}, {self.y:.10f}, {self.z:.10f}]"
-
-    def __init__(self, x, y, z):
-        self.x = x
-        self.y = y
-        self.z = z
 
     def norm2(self):
         return self.x ** 2 + self.y ** 2 + self.z ** 2
